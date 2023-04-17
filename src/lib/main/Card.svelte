@@ -5,11 +5,11 @@
 </script>
 
 <div
-	class="flex gap-4 items-center rounded bg-white/10 overflow-hidden hover:bg-white/20 
+	class="flex gap-4 items-center min-w-[250px] rounded bg-white/10 overflow-hidden hover:bg-white/20 
   transition-all ease duration-300 cursor-pointer
   group relative"
 >
-	<div class="w-20 h-20 min-w-[100px]">
+	<div class="w-20 h-20 min-w-[80px] overflow-hidden">
 		<slot />
 		{#if img}
 			<img src={img} class="w-full h-full" alt="now playing" />
@@ -19,7 +19,7 @@
 
 	<button
 		class="absolute right-0 px-2 opacity-0 text-green-500
-    hover:scale-105 group-hover:opacity-100 hover:text-green-400"
+    transition-colors transition-opacity duration-300 group-hover:opacity-100 hover:scale-105 hover:text-green-400"
 	>
 		<Icon icon="material-symbols:play-circle" width="56" />
 	</button>

@@ -55,7 +55,7 @@
 			<div class="flex items-center h-1 w-[400px] rounded-lg bg-white/40 group">
 				<div class="h-1 w-[50%] rounded-lg bg-white group-hover:bg-green-500" />
 				<div
-					class="rounded-full w-3 h-3 absolute bg-white left-[49%] invisible group-hover:visible group-hover:bg-green-500"
+					class="rounded-full w-3 h-3 absolute bg-white left-[49%] invisible group-hover:visible"
 				/>
 			</div>
 			<span class="text-xs text-white/70">4:00</span>
@@ -80,7 +80,7 @@
 				<div class="flex items-center h-1 w-24 rounded-lg bg-white/40 group relative">
 					<div class="h-1 w-[80%] rounded-lg bg-white group-hover:bg-green-500" />
 					<div
-						class="rounded-full w-3 h-3 absolute bg-white left-[79%] invisible group-hover:visible group-hover:bg-green-500"
+						class="rounded-full w-3 h-3 absolute bg-white left-[79%] invisible group-hover:visible"
 					/>
 				</div>
 			</div>

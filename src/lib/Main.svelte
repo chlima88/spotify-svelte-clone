@@ -37,7 +37,7 @@
 
 	<h1 class="font-dm-sans font-bold text-3xl mb-4">Good Morning</h1>
 
-	<div class="grid grid-cols-3 auto-cols-fr gap-4 font-bold">
+	<div class="grid grid-cols-3 grid-flow-row auto-cols-max sm:auto-cols-min gap-4 font-bold">
 		<Card title="Dubstep">
 			<PlayListImages />
 		</Card>

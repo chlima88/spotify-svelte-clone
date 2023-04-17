@@ -4,13 +4,13 @@
 </script>
 
 <nav class="flex flex-col w-64 bg-black text-white/60 px-6 ">
-	<div class="flex align-center justify-center py-8">
+	<div class="flex align-center justify-center w-32 py-6 mb-2">
 		<img src={SpotifyLogo} alt="logo" />
 	</div>
 
-	<div class="text-sm mb-6">
+	<div class="flex flex-col gap-2 text-sm mb-6">
 		<div
-			class="flex gap-5 items-center py-2 rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
+			class="flex gap-3 items-center rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
 		>
 			<div class="text-3xl">
 				<Icon icon="fluent:home-24-filled" />
@@ -18,7 +18,7 @@
 			<span class="font-semibold">Home</span>
 		</div>
 		<div
-			class="flex gap-5 items-center py-2 rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
+			class="flex gap-3 items-center rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
 		>
 			<div class="text-3xl">
 				<Icon icon="fe:search" />
@@ -26,7 +26,7 @@
 			<span class="font-semibold">Search</span>
 		</div>
 		<div
-			class="flex gap-5 items-center py-2 rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
+			class="flex gap-3 items-center rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
 		>
 			<div class="text-3xl">
 				<Icon icon="bx:library" />
@@ -37,7 +37,7 @@
 
 	<div class="text-sm">
 		<div
-			class="flex gap-5 items-center py-2 rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
+			class="flex gap-3 items-center py-2 rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
 		>
 			<div class="text-3xl">
 				<Icon icon="mdi:plus-box" />
@@ -45,7 +45,7 @@
 			<span class="font-semibold">New Playlist</span>
 		</div>
 		<div
-			class="flex gap-5 items-center py-2 rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
+			class="flex gap-3 items-center py-2 rounded-md cursor-pointer hover:text-white transition-all ease-linear duration-300"
 		>
 			<div class="text-3xl">
 				<Icon icon="mdi:cards-heart" />
