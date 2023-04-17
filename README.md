@@ -1,3 +1,9 @@
+# Live Demo 🔥
+
+This project was created while i was training what i've recently learned about [Sveltekit](https://kit.svelte.dev/) and [Tailwind](https://tailwindcss.com/docs/installation)
+
+https://spoticlone-cj.netlify.app
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).

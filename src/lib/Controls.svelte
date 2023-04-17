@@ -28,6 +28,7 @@
 				elapsed++;
 			} else {
 				elapsed = 0;
+				paused = !paused;
 				clearInterval(timer);
 			}
 		}, 1000);
