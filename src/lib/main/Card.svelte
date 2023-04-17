@@ -9,10 +9,10 @@
   transition-all ease duration-300 cursor-pointer
   group relative"
 >
-	<div class="w-20 h-20 min-w-[80px] overflow-hidden">
+	<div class="w-20 h-20 min-w-[80px] overflow-hidden shadow-2xl shadow-black">
 		<slot />
 		{#if img}
-			<img src={img} class="w-full h-full" alt="now playing" />
+			<img src={img} class="w-full h-full " alt="now playing" />
 		{/if}
 	</div>
 	<span>{title}</span>

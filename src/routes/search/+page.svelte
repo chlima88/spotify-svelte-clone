@@ -1,6 +1,6 @@
 <script>
 	import Main from '$lib/Main.svelte';
-	import '../app.css';
+	import '../../app.css';
 </script>
 
 <Main />

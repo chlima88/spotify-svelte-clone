@@ -8,13 +8,13 @@
 	import Card from '$lib/main/Card.svelte';
 </script>
 
-<div class="text-white bg-gradient-to-b from-zinc-900 to-zinc-950 w-full px-8">
+<div class="text-white bg-gradient-to-b from-zinc-800 to-zinc-950 w-full px-8">
 	<div class="flex h-16 items-center justify-between mb-4">
 		<div class="flex gap-4">
-			<div class="text-3xl text-white/50 bg-zinc-950 rounded-full hover:text-white">
+			<div class="text-4xl text-white/50 bg-zinc-950 rounded-full hover:text-white">
 				<Icon icon="mdi:chevron-left" />
 			</div>
-			<div class="text-3xl text-white/50 bg-zinc-950 rounded-full hover:text-white">
+			<div class="text-4xl text-white/50 bg-zinc-950 rounded-full hover:text-white">
 				<Icon icon="mdi:chevron-right" />
 			</div>
 		</div>
@@ -24,7 +24,7 @@
 				>Faça upgrade</button
 			>
 			<button
-				class="bg-black/90 flex items-center gap-2 font-bold p-[2px] rounded-2xl text-sm hover:bg-zinc-800"
+				class="bg-black/75 flex items-center gap-2 font-bold p-[2px] rounded-2xl text-sm hover:bg-zinc-800"
 			>
 				<div class="bg-zinc-600 rounded-full">
 					<Icon icon="mdi:user-outline" width="28" />
@@ -35,15 +35,19 @@
 		</div>
 	</div>
 
-	<h1 class="font-dm-sans font-bold text-3xl mb-4">Good Morning</h1>
+	<div class="max-w-[120rem]">
+		<h1 class="font-dm-sans font-bold text-3xl mb-4">Good Morning</h1>
 
-	<div class="grid grid-cols-3 grid-flow-row auto-cols-max sm:auto-cols-min gap-4 font-bold">
-		<Card title="Dubstep">
-			<PlayListImages />
-		</Card>
-		<Card title="Trivecta" img={AlbumImg1} />
-		<Card title="Akira Complex" img={AlbumImg2} />
-		<Card title="Virtual Riot" img={AlbumImg3} />
-		<Card title="Illenium" img={AlbumImg4} />
+		<div
+			class="grid grid-cols-3 grid-flow-row auto-cols-max sm:auto-cols-min gap-x-6 gap-y-4 font-bold"
+		>
+			<Card title="Dubstep">
+				<PlayListImages />
+			</Card>
+			<Card title="Trivecta" img={AlbumImg1} />
+			<Card title="Akira Complex" img={AlbumImg2} />
+			<Card title="Virtual Riot" img={AlbumImg3} />
+			<Card title="Illenium" img={AlbumImg4} />
+		</div>
 	</div>
 </div>
