@@ -36,7 +36,7 @@
 	</div>
 
 	<div class="max-w-[120rem]">
-		<h1 class="font-dm-sans font-bold text-3xl mb-4">Good Morning</h1>
+		<h1 class="font-bold text-3xl mb-4">Good Morning</h1>
 
 		<div
 			class="grid grid-cols-3 grid-flow-row auto-cols-max sm:auto-cols-min gap-x-6 gap-y-4 font-bold"
