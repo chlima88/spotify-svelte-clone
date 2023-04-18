@@ -1,18 +1,22 @@
 export const audioList = [
 	{
+		artist: 'Artist 1',
 		name: 'Ambient Piano and Strings',
-		url: 'https://cdn.pixabay.com/download/audio/2021/11/13/audio_cb4f1212a9.mp3'
+		url: 'https://cj-lab.s3.amazonaws.com/ambient-piano-ampamp-strings-10711.mp3'
 	},
 	{
+		artist: 'Artist 2',
 		name: 'Please Calm My Mind',
-		url: 'https://cdn.pixabay.com/download/audio/2022/11/11/audio_84306ee149.mp3'
+		url: 'https://cj-lab.s3.amazonaws.com/please-calm-my-mind-125566.mp3'
 	},
 	{
+		artist: 'Artist 3',
 		name: 'Easy lifestyle',
-		url: 'https://cdn.pixabay.com/download/audio/2023/02/03/audio_534a89f910.mp3'
+		url: 'https://cj-lab.s3.amazonaws.com/please-calm-my-mind-125566.mp3'
 	},
 	{
+		artist: 'Artist 4',
 		name: 'Guitar Electro Sport Trailer',
-		url: 'https://cdn.pixabay.com/download/audio/2022/07/25/audio_3266b47d61.mp3'
+		url: 'https://cj-lab.s3.amazonaws.com/guitar-electro-sport-trailer-115571.mp3'
 	}
 ];
