@@ -1,15 +1,15 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import Playing from '$lib/assets/vr-lunar.jpg';
-	import { audioList } from '../data/songs';
-	import { onMount } from 'svelte';
-
-	let audio = audioList[3];
+	import { audioLibrary } from '../data/songs';
 
 	let volume = 0.5;
+	let prevVolume = 0;
 	let muted = false;
 	let paused = true;
 	let loop = true;
+	let track = 0;
+	$: audio = audioLibrary[track];
 
 	$: time = toggleTime ? seektime : elapsed;
 	let toggleTime = false;
@@ -28,6 +28,32 @@
 
 	const handlePlay = () => {
 		paused = !paused;
+	};
+
+	const handleMute = () => {
+		if (muted) {
+			volume = prevVolume;
+		} else {
+			prevVolume = volume;
+			volume = 0;
+		}
+		muted = !muted;
+	};
+
+	const handleTrackForward = () => {
+		if (audioLibrary.length === track + 1) {
+			track = 0;
+		} else {
+			track++;
+		}
+	};
+
+	const handleTrackBack = () => {
+		if (track === 0) {
+			elapsed = 0;
+		} else {
+			track--;
+		}
 	};
 
 	const handleSeek = (event: Event) => {
@@ -73,7 +99,7 @@
 	<div class="w-1/4 min-w-[250px]">
 		<div class="flex items-center">
 			<div class="flex-shrink-0 w-14 h-14">
-				<img src={Playing} class="w-full h-full" alt="now playing" />
+				<img src={audio.image} class="w-full h-full" alt="now playing" />
 			</div>
 			<div class="flex flex-col px-5 overflow-hidden">
 				<div class="w-full text-sm truncate font-semibold">
@@ -99,9 +125,13 @@
 		bind:paused
 		bind:muted
 		bind:volume
+		autoplay
 		{loop}
 		preload="auto"
 		on:ended={() => {
+			if (track + 1 < audioLibrary.length) {
+				handleTrackForward();
+			}
 			elapsed = 0;
 		}}
 	/>
@@ -112,7 +142,7 @@
 				<button class="px-2 text-white/40 hover:text-white">
 					<Icon icon="basil:shuffle-outline" width="24" />
 				</button>
-				<button class="px-2 text-white/70 hover:text-white">
+				<button class="px-2 text-white/70 hover:text-white" on:click={handleTrackBack}>
 					<Icon icon="ri:skip-back-fill" width="24" />
 				</button>
 				<button on:click={handlePlay} class="px-2 text-white hover:scale-105">
@@ -122,7 +152,7 @@
 						<Icon icon="mdi:pause-circle" width="42" />
 					{/if}
 				</button>
-				<button class="px-2 text-white/70 hover:text-white">
+				<button class="px-2 text-white/70 hover:text-white" on:click={handleTrackForward}>
 					<Icon icon="ri:skip-forward-fill" width="24" />
 				</button>
 				<button
@@ -171,7 +201,7 @@
 				<button class="text-white/70 hover:text-white">
 					<Icon icon="lucide:monitor-speaker" width="20" />
 				</button>
-				<button on:click={() => (muted = !muted)} class="text-white/70 hover:text-white">
+				<button on:click={handleMute} class="text-white/70 hover:text-white">
 					{#if volume == 0 || muted}
 						<Icon icon="radix-icons:speaker-off" width="16" />
 					{:else if volume <= 0.3}
