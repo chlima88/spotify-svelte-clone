@@ -4,51 +4,66 @@
 	import { audioList } from '../data/songs';
 	import { onMount } from 'svelte';
 
-	$: volume = 0.5;
-	let muted = false;
-	let paused = false;
+	let audio = audioList[3];
 
-	let timer: number = 0;
-	let duration = 4 * 60;
-	let elapsed = 23;
+	let volume = 0.5;
+	let muted = false;
+	let paused = true;
+	let loop = true;
+
+	$: time = toggleTime ? seektime : elapsed;
+	let toggleTime = false;
+	let duration = 0;
+	let elapsed = 0;
+	let seektime = 0;
 	$: fmtDuration = fmtTime(duration);
 	$: fmtElapsed = fmtTime(elapsed);
-	$: progress = `${(elapsed / duration) * 100}%`;
+	$: progress = isNaN(time / duration) ? 0 : (time / duration) * 100;
 
 	function fmtTime(time: number) {
-		return {
-			minutes: ~~(time / 60),
-			seconds: (time % 60).toString().padStart(2, '0')
-		};
+		const minutes = ~~(time / 60);
+		const seconds = Math.floor(time % 60);
+		return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 	}
 
-	const updateElapsed = () => {
-		return setInterval(() => {
-			if (elapsed < duration) {
-				elapsed++;
-			} else {
-				elapsed = 0;
-				paused = !paused;
-				clearInterval(timer);
-			}
-		}, 1000);
-	};
-
 	const handlePlay = () => {
-		if (!paused) {
-			timer = updateElapsed();
-		} else {
-			clearInterval(timer);
-		}
 		paused = !paused;
 	};
 
-	function handleRangeInputChange(e: Event) {
-		const min = e.target?.min;
-		const max = e.target?.max;
-		const val = e.target?.value;
+	const handleSeek = (event: Event) => {
+		const target = event.currentTarget;
 
-		e.target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
+		toggleTime = true;
+
+		function calcSeekTime(event: Event) {
+			const { left, width } = target.getBoundingClientRect();
+			let p = (event.clientX - left) / width;
+			if (p < 0) p = 0;
+			if (p > 1) p = 1;
+
+			seektime = p * duration;
+		}
+
+		calcSeekTime(event);
+
+		window.addEventListener('pointermove', calcSeekTime);
+		window.addEventListener(
+			'pointerup',
+			() => {
+				elapsed = seektime;
+				toggleTime = false;
+				window.removeEventListener('pointermove', calcSeekTime);
+			},
+			{ once: true }
+		);
+	};
+
+	function handleRangeInputChange(event: Event) {
+		const min = event.target?.min;
+		const max = event.target?.max;
+		const val = event.target?.value;
+
+		event.target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
 	}
 </script>
 
@@ -62,10 +77,10 @@
 			</div>
 			<div class="flex flex-col px-5 overflow-hidden">
 				<div class="w-full text-sm truncate font-semibold">
-					<a href="/">Lunar</a>
+					<a href="/">{audio.name}</a>
 				</div>
 				<div class="w-full text-xs truncate text-white/70 hover:text-white">
-					<a href="/">Virtual Riot</a>
+					<a href="/">{audio.artist}</a>
 				</div>
 			</div>
 			<button class="px-2 text-white/70 hover:text-white">
@@ -77,7 +92,21 @@
 		</div>
 	</div>
 
-	<div class="flex flex-col items-center gap-1 w-2/4 max-w-2xl">
+	<audio
+		src={audio.url}
+		bind:currentTime={elapsed}
+		bind:duration
+		bind:paused
+		bind:muted
+		bind:volume
+		{loop}
+		preload="auto"
+		on:ended={() => {
+			elapsed = 0;
+		}}
+	/>
+
+	<div class="flex flex-col items-center gap-1 w-2/4 max-w-2xl h-full">
 		<div class="flex items-center justify-center">
 			<div class="flex items-center gap-1">
 				<button class="px-2 text-white/40 hover:text-white">
@@ -87,7 +116,7 @@
 					<Icon icon="ri:skip-back-fill" width="24" />
 				</button>
 				<button on:click={handlePlay} class="px-2 text-white hover:scale-105">
-					{#if !paused}
+					{#if paused}
 						<Icon icon="material-symbols:play-circle" width="42" />
 					{:else}
 						<Icon icon="mdi:pause-circle" width="42" />
@@ -96,25 +125,37 @@
 				<button class="px-2 text-white/70 hover:text-white">
 					<Icon icon="ri:skip-forward-fill" width="24" />
 				</button>
-				<button class="px-2 text-white/40 hover:text-white">
+				<button
+					class="px-2 text-white/40 hover:text-white 
+					[&.loop]:text-green-500 [&.loop]:hover:text-green-400"
+					class:loop
+					on:click={() => {
+						loop = !loop;
+					}}
+				>
 					<Icon icon="simple-line-icons:loop" />
 				</button>
 			</div>
 		</div>
-		<div class="flex items-center w-full justify-center gap-2 ">
-			<span class="text-xs text-white/70">{fmtElapsed.minutes}:{fmtElapsed.seconds}</span>
-			<div class=" flex items-center h-1 w-full relative group">
-				<div
-					class="flex items-center h-1 w-full rounded-lg bg-zinc-500  overflow-hidden"
-					style="--progress-transform: {progress}"
-				>
-					<div class="h-1 w-full progress-bar rounded-lg bg-white group-hover:bg-green-500" />
+		<div class="flex items-center h-full w-full justify-center gap-2 ">
+			<span class="text-xs text-white/70">{fmtElapsed}</span>
+			<div
+				class="flex items-center w-full h-full group"
+				on:pointerdown={(event) => handleSeek(event)}
+			>
+				<div class=" flex items-center h-1 w-full relative">
 					<div
-						class="rounded-full w-3 h-3 absolute bg-white left-[--progress-transform] -translate-x-1/2 invisible group-hover:visible"
-					/>
+						class="flex items-center h-1 w-full rounded-lg bg-zinc-500  overflow-hidden"
+						style="--progress-transform: {progress}%"
+					>
+						<div class="h-1 w-full progress-bar rounded-lg bg-white group-hover:bg-green-500" />
+						<div
+							class="rounded-full w-3 h-3 absolute bg-white left-[--progress-transform] -translate-x-1/2 invisible group-hover:visible"
+						/>
+					</div>
 				</div>
 			</div>
-			<span class="text-xs text-white/70">{fmtDuration.minutes}:{fmtDuration.seconds}</span>
+			<span class="text-xs text-white/70">{fmtDuration}</span>
 		</div>
 	</div>
 
