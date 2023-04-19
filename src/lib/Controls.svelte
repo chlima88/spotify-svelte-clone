@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
-	import Playing from '$lib/assets/vr-lunar.jpg';
 	import { audioLibrary } from '../data/songs';
+	export let classes: string = '';
 
 	let volume = 0.5;
 	let prevVolume = 0;
@@ -21,8 +21,8 @@
 	$: progress = isNaN(time / duration) ? 0 : (time / duration) * 100;
 
 	function fmtTime(time: number) {
-		const minutes = ~~(time / 60);
-		const seconds = Math.floor(time % 60);
+		const minutes = ~~(time / 60) || 0;
+		const seconds = Math.floor(time % 60) || 0;
 		return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 	}
 
@@ -94,7 +94,7 @@
 </script>
 
 <div
-	class="flex h-24 p-4 text-white items-center justify-between bg-zinc-900 border-t border-t-neutral-700/40"
+	class="{classes} flex h-24 p-4 text-white items-center justify-between bg-zinc-900 border-t border-t-neutral-700/40 "
 >
 	<div class="w-1/4 min-w-[250px]">
 		<div class="flex items-center">
@@ -119,20 +119,22 @@
 	</div>
 
 	<audio
+		on:play={(event) => (duration = event.target.duration)}
 		src={audio.url}
+		autoplay={!paused}
 		bind:currentTime={elapsed}
 		bind:duration
 		bind:paused
 		bind:muted
 		bind:volume
-		autoplay
 		{loop}
-		preload="auto"
 		on:ended={() => {
 			if (track + 1 < audioLibrary.length) {
 				handleTrackForward();
+				paused = !paused;
+			} else {
+				elapsed = 0;
 			}
-			elapsed = 0;
 		}}
 	/>
 
