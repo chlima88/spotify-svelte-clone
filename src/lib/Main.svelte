@@ -5,8 +5,8 @@
 	import { audioLibrary } from '../data/songs';
 </script>
 
-<div class="flex-1 text-white px-8 w-full h-full py-2 main">
-	<div class="max-w-[120rem] h-full">
+<div class="flex-1 text-white px-8 w-full py-2 main">
+	<div class="max-w-[120rem] ">
 		<h1 class="font-bold text-3xl mb-4">Good Morning</h1>
 
 		<div

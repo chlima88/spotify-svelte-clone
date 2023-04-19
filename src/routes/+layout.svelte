@@ -7,7 +7,7 @@
 </script>
 
 <div class="flex flex-col max-w-screen max-h-screen text-white">
-	<div class="flex w-full overflow-hidden mainview">
+	<div class="flex w-full h-screen overflow-hidden mainview">
 		<Sidebar />
 		<div
 			class="flex flex-col w-full
