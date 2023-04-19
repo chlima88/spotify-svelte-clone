@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
 	import Icon from '@iconify/svelte';
 	import SpotifyLogo from '$lib/assets/spoticlone.png';
 	import MenuItem from '$lib/sidebar/MenuItem.svelte';
 	import Menu from '$lib/sidebar/Menu.svelte';
+	export let classes: string = '';
 </script>
 
-<nav class="flex flex-col w-64 bg-black text-white/60 px-6 overflow-y-hidden">
+<nav class="{classes} flex flex-col w-64 bg-black text-white/60 px-6 overflow-y-hidden">
 	<div class="flex align-center justify-center w-40 py-6 mb-2">
 		<img src={SpotifyLogo} alt="logo" />
 	</div>
