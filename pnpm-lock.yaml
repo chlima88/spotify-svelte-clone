@@ -31,6 +31,12 @@ devDependencies:
   eslint-plugin-svelte3:
     specifier: ^4.0.0
     version: 4.0.0(eslint@8.28.0)(svelte@3.54.0)
+  overlayscrollbars:
+    specifier: ^2.1.1
+    version: 2.1.1
+  overlayscrollbars-svelte:
+    specifier: ^0.4.0
+    version: 0.4.0(overlayscrollbars@2.1.1)(svelte@3.54.0)
   postcss:
     specifier: ^8.4.22
     version: 8.4.22
@@ -1688,6 +1694,20 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.3
+    dev: true
+
+  /overlayscrollbars-svelte@0.4.0(overlayscrollbars@2.1.1)(svelte@3.54.0):
+    resolution: {integrity: sha512-5liVtMb0WgHu2ngICYS2c5ihEVQ/6rSFCDuymamTO6fS8M1pgfPeUyaQp9dTms+p+yuQmjdNmplR5dGgzgFhkw==}
+    peerDependencies:
+      overlayscrollbars: ^2.0.0
+      svelte: ^3.44.0
+    dependencies:
+      overlayscrollbars: 2.1.1
+      svelte: 3.54.0
+    dev: true
+
+  /overlayscrollbars@2.1.1:
+    resolution: {integrity: sha512-xvs2g8Tcq9+CZDpLEUchN3YUzjJhnTWw9kwqT/qcC53FIkOyP9mqnRMot5sW16tcsPT1KaMyzF0AMXw/7E4a8g==}
     dev: true
 
   /p-limit@3.1.0:

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+@import 'overlayscrollbars/overlayscrollbars.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,8 +13,6 @@
   input[type=range]:hover {
     @apply bg-gradient-to-r from-green-500 to-green-500 
     bg-[length:var(--volume-level)_100%];
-    /* background-image: linear-gradient(rgb(34, 197, 94, 0.6), rgb(34, 197, 94, 0.6));
-    background-size: var(--volume-level) 100%; */
   }
 
   input[type=range]:hover::-webkit-slider-thumb {
@@ -28,4 +27,9 @@
   input[type='range']::-webkit-slider-runnable-track {
     -webkit-appearance: none;
   }
+}
+
+.os-theme-light {
+  --os-size: 16px;
+  --os-handle-border-radius: 0;
 }
