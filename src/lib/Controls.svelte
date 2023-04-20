@@ -197,9 +197,9 @@
 				<button class="text-white/70 hover:text-white">
 					<Icon icon="tabler:microphone-2" width="18" />
 				</button>
-				<button class="text-white/70 hover:text-white">
+				<a href="/queue" class="text-white/70 hover:text-white">
 					<Icon icon="carbon:row" width="20" />
-				</button>
+				</a>
 				<button class="text-white/70 hover:text-white">
 					<Icon icon="lucide:monitor-speaker" width="20" />
 				</button>
