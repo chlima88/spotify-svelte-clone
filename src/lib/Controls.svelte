@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
-	import { audioLibrary } from '../data/songs';
+	import { audioLibrary } from '$lib/data/songs';
 	export let classes: string = '';
 
 	let volume = 0.5;
