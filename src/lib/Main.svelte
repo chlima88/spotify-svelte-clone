@@ -2,7 +2,7 @@
 	import PlayListImages from '$lib/main/PlayListImages.svelte';
 	import Card from '$lib/main/Card.svelte';
 
-	import { audioLibrary } from '../data/songs';
+	import { audioLibrary } from '$lib/data/songs';
 </script>
 
 <div class="flex-1 text-white px-8 w-full py-2 main">
