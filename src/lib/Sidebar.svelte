@@ -7,7 +7,7 @@
 </script>
 
 <nav class="{classes} flex flex-col w-64 bg-black text-white/60 px-6 overflow-y-hidden">
-	<div class="flex align-center justify-center w-40 py-6 mb-2">
+	<div class="flex align-center justify-center w-40 py-4 mb-2">
 		<img src={SpotifyLogo} alt="logo" />
 	</div>
 
