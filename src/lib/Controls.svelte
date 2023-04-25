@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import { audioLibrary } from '$lib/data/songs';
+	import { currentTrackIndex } from '$lib/store/store.js';
+
 	export let classes: string = '';
 
 	let volume = 0.5;
@@ -8,8 +10,7 @@
 	let muted = false;
 	let paused = true;
 	let loop = true;
-	let track = 0;
-	$: audio = audioLibrary[track];
+	$: audio = audioLibrary[$currentTrackIndex];
 
 	$: time = toggleTime ? seektime : elapsed;
 	let toggleTime = false;
@@ -41,18 +42,18 @@
 	};
 
 	const handleTrackForward = () => {
-		if (audioLibrary.length === track + 1) {
-			track = 0;
+		if (audioLibrary.length === $currentTrackIndex + 1) {
+			currentTrackIndex.reset();
 		} else {
-			track++;
+			currentTrackIndex.increment();
 		}
 	};
 
 	const handleTrackBack = () => {
-		if (track === 0) {
+		if ($currentTrackIndex === 0) {
 			elapsed = 0;
 		} else {
-			track--;
+			currentTrackIndex.decrement();
 		}
 	};
 
@@ -129,7 +130,7 @@
 		bind:volume
 		{loop}
 		on:ended={() => {
-			if (track + 1 < audioLibrary.length) {
+			if ($currentTrackIndex + 1 < audioLibrary.length) {
 				handleTrackForward();
 				paused = !paused;
 			} else {
