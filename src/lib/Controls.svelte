@@ -1,14 +1,13 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import { audioLibrary } from '$lib/data/songs';
-	import { currentTrackIndex } from '$lib/store/store.js';
+	import { currentTrackIndex, paused } from '$lib/store/store.js';
 
 	export let classes: string = '';
 
 	let volume = 0.5;
 	let prevVolume = 0;
 	let muted = false;
-	let paused = true;
 	let loop = true;
 	$: audio = audioLibrary[$currentTrackIndex];
 
@@ -28,7 +27,8 @@
 	}
 
 	const handlePlay = () => {
-		paused = !paused;
+		// paused = !paused;
+		paused.toggle();
 	};
 
 	const handleMute = () => {
@@ -118,21 +118,19 @@
 			</button>
 		</div>
 	</div>
-
 	<audio
 		on:play={(event) => (duration = event.target.duration)}
 		src={audio.url}
-		autoplay={!paused}
+		autoplay={!$paused}
 		bind:currentTime={elapsed}
 		bind:duration
-		bind:paused
+		bind:paused={$paused}
 		bind:muted
 		bind:volume
 		{loop}
 		on:ended={() => {
 			if ($currentTrackIndex + 1 < audioLibrary.length) {
 				handleTrackForward();
-				paused = !paused;
 			} else {
 				elapsed = 0;
 			}
@@ -149,7 +147,7 @@
 					<Icon icon="ri:skip-back-fill" width="24" />
 				</button>
 				<button on:click={handlePlay} class="px-2 text-white hover:scale-105">
-					{#if paused}
+					{#if $paused}
 						<Icon icon="material-symbols:play-circle" width="42" />
 					{:else}
 						<Icon icon="mdi:pause-circle" width="42" />
