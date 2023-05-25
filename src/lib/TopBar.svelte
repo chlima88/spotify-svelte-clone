@@ -36,7 +36,13 @@
 					<div class="flex items-center p-2 w-full hover:bg-zinc-700">
 						<div class="flex items-center gap-2 w-full">
 							<Icon icon="mdi:github" width="24" />
-							<a href="https://github.com/chlima88" target="_blank" rel="noreferrer"> Github</a>
+							<a
+								href="https://github.com/chlima88/spotify-svelte-clone"
+								target="_blank"
+								rel="noreferrer"
+							>
+								Github</a
+							>
 						</div>
 						<Icon icon="ooui:new-window-ltr" width="16" />
 					</div>
